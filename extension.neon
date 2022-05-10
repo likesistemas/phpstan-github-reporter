@@ -1,0 +1,3 @@
+services:
+	errorFormatter.githubReporter:
+		class: Like\Phpstan\GithubReporter
