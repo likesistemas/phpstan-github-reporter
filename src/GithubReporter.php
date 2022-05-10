@@ -17,10 +17,23 @@ use function str_replace;
  * @see https://help.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-error-message
  */
 class GithubReporter implements ErrorFormatter {
+
+	/**
+	 * @var RelativePathHelper
+	 */
+	private $relativePathHelper;
+
+	/**
+	 * @var ErrorFormatter
+	 */
+	private $errorFormatter;
+
 	public function __construct(
-		private RelativePathHelper $relativePathHelper,
-		private ErrorFormatter $errorFormatter,
+		RelativePathHelper $relativePathHelper,
+		ErrorFormatter $errorFormatter
 	) {
+		$this->relativePathHelper = $relativePathHelper;
+		$this->errorFormatter = $errorFormatter;
 	}
 
 	public function formatErrors(AnalysisResult $analysisResult, Output $output): int {
